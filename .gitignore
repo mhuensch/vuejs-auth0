@@ -1,0 +1,17 @@
+node_modules/
+profile/
+/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+selenium-debug.log
+etc
+
+# Editor directories and files
+.DS_Store
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
