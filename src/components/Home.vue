@@ -3,12 +3,17 @@
 
     <div v-if="isAuthenticated">
       <h1>Welcome {{userProfile.nickname}}!</h1>
-      You are seeing your private view of this page.
+      This is your custom view of this page.
+      <br/> Name: {{userProfile.name}}
+      <br/> Nickname: {{userProfile.nickname}}
+      <br/> Picture:
+      <br/> <img :src="userProfile.picture" />
     </div>
 
     <div v-else>
       <h1>Welcome Home!</h1>
-      You are seeing the public view of this page because you are not currently authenticated.
+      You are seeing the public view of this page. <br />
+      Login to your information.
     </div>
 
   </div>
@@ -23,7 +28,7 @@
   }
 
   function mounted () {
-    this.$eventHub.$on('authChange', changedTo => {
+    this.$authService.eventHub.$on('authChange', changedTo => {
       this.authenticated = changedTo
     })
   }

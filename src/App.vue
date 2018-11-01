@@ -22,7 +22,7 @@
 
 <script>
 function mounted () {
-  this.$eventHub.$on('authChange', changedTo => {
+  this.$authService.eventHub.$on('authChange', changedTo => {
     this.authenticated = changedTo
     this.$router.replace('/home')
   })
@@ -36,7 +36,6 @@ function data () {
 }
 
 function isAuthenticated () {
-  console.log('RE-EVALUATING', this.authenticated)
   return this.authenticated
 }
 
