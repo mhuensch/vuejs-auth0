@@ -1,23 +1,66 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div>
+    <nav>
+      <router-link to="/">
+        Home
+      </router-link>
+
+      <button @click="logout()" v-if="isAuthenticated">
+        Logout
+      </button>
+
+      <router-link to="/login" v-else>
+        Login
+      </router-link>
+    </nav>
+
+    <router-view>
+    </router-view>
+
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
+function mounted () {
+  this.$eventHub.$on('authChange', changedTo => {
+    this.authenticated = changedTo
+    this.$router.replace('/home')
+  })
 }
+
+function data () {
+  let result =
+    { authenticated: this.$authService.isAuthenticated()
+    }
+  return result
+}
+
+function isAuthenticated () {
+  console.log('RE-EVALUATING', this.authenticated)
+  return this.authenticated
+}
+
+function logout () {
+  this.$authService.logout()
+}
+
+let module =
+  { name: 'app'
+  , data: data
+  , mounted: mounted
+  , computed:
+    { isAuthenticated: isAuthenticated
+    }
+  , methods:
+    { logout: logout
+    }
+  }
+
+export default module
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  a {
+    margin: 5px;
+  }
 </style>

@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 selenium-debug.log
 etc
+auth0-variables.js
 
 # Editor directories and files
 .DS_Store
