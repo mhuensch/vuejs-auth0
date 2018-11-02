@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div v-if="isAuthenticated">
       <h1>Welcome {{userProfile.nickname}}!</h1>
       This is your custom view of this page.

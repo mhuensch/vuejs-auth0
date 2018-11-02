@@ -5,6 +5,10 @@
         Home
       </router-link>
 
+      <router-link to="/private" v-if="isAuthenticated">
+        Private
+      </router-link>
+
       <button @click="logout()" v-if="isAuthenticated">
         Logout
       </button>
