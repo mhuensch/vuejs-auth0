@@ -68,7 +68,7 @@ class AuthService {
     this.auth0.parseHash((err, authResult) => {
       // No matter what happened, reset the windows location
       // to help prevent bleeding the token.
-      window.location.replace('/')
+      // window.location.replace('/')
 
       // If the auth failed for any reason, tell the clients
       // we're not logged in and throw an error.
@@ -80,6 +80,7 @@ class AuthService {
 
       // Save the user profile and notify and listeners that we're auth'd
       this.setUserProfile(authResult)
+      console.log(authResult)
       this.eventHub.$emit('authChange', true)
     })
   }
@@ -99,6 +100,11 @@ class AuthService {
         , access: authResult.accessToken
         , expiration: authResult.expiresIn * 1000 + Date.now()
         }
+      // NOTE: this should be whatever URL is configured in the
+      // auth0-authorization-extension rule code.
+      // SEE: external/auth0-authorization-extension.js
+      // SEE: rules in Auth0 account
+      , permissions: payload['https://storybox.ai/permissions']
       , updated: Date.now()
       }
 
