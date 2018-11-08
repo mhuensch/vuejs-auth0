@@ -32,7 +32,7 @@ function (user, context, callback) {
 
     // This is custom code from the rule that is automatically
     // added by the Auth0 authorization extension.
-    context.idToken['https://' + context.clientName + '/permissions'] = data.permissions;
+    context.accessToken['https://' + context.clientName + '/permissions'] = data.permissions;
 
     return callback(null, user, context);
   });
